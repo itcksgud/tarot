@@ -26,6 +26,18 @@ app.use(bodyParser.json());
 //mongodb
 const {MongoClient, ObjectId} = require('mongodb');
 
+async function connectToDb() {
+    const client = new MongoClient(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+      await client.connect();
+      console.log("Connected to MongoDB");
+      const db = client.db('your-database-name');
+      return db;
+    } catch (error) {
+      console.error('Failed to connect to MongoDB:', error);
+    }
+  }
+connectToDb()
 let db
 const url = 'mongodb+srv://kingcrown20200:qwer1234@cluster0.rwn2f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 new MongoClient(url).connect().then((client)=>{
