@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/list">타로 못해요 ㅋㅋ 재미로 보는거임</a>
+    </div>
+
+    <div class="cardcontainer" style="margin: 10px;">
+        <div class="cardgroup">
+            <div class="cardgroup-1">
+                <div>
+                    <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[5]%>.jpg">
+                </div>
+                <div class="cardgroup-1-row">
+                    <div>
+                        <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[3]%>.jpg">
+                    </div>
+                    <div class="image-wrapper" onclick="swapCard()">
+                            <img class="first-image" src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[0]%>.jpg" style="z-index: -1;">
+                            <img class="second-image" src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[1]%>.jpg" style="z-index: 1;">
+                    </div>
+                    <div>
+                        <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[4]%>.jpg">
+                    </div>
+                </div>
+                    <div>
+                        <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[2]%>.jpg">
+                    </div>
+                </div>
+        
+                <div class="cardgroup-2">
+                    <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[9]%>.jpg">
+                    <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[8]%>.jpg">
+                    <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[7]%>.jpg">
+                    <img src="https://gfx.tarot.com/images/site/decks/universal-waite/full_size/<%=post.numbers[6]%>.jpg">
+                </div>
+        </div>
+        <div class="text-area">
+            <h1 class="post-title"><%= post.title %></h1>
+            <p class="post-nickname"><%= post.nickname %></p>
+            <div class="post-content"><%= post.content %></div>
+            <div class="post-answer"><%= post.answer %></div>
+        </div>
+
+            
+        </div>
+    </div>
+    
+    
+    <script>
+        function swapCard() {
+        // 첫 번째와 두 번째 이미지 요소 가져오기
+        var firstImage = document.querySelector('.first-image');
+        var secondImage = document.querySelector('.second-image');
+
+        // 현재 z-index 값에 따라 순서 변경
+        if (firstImage.style.zIndex == -1) {
+            firstImage.style.zIndex = 1;
+            secondImage.style.zIndex = -1;
+        } else {
+            firstImage.style.zIndex = -1;
+            secondImage.style.zIndex = 1;
+        }
+    }
+    </script>
+</body>
+</html>

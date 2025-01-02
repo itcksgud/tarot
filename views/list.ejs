@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/list">타로 못해요 ㅋㅋ 재미로 보는거임</a>
+    </div>
+
+    
+
+    <div class="board-container">
+        <a href="/submit" class="top-button">새 글 작성</a>
+        <% for (let i = 0; i < post.length; i++) { %>
+            <% let lock = post[i].lock === "lock" ? "🔒" : "🔓"; %>
+            <div class="post-box" id="post-box-<%= i %>">
+                <div class="post" onclick="handlePostClick('<%= post[i].lock %>','<%=post[i].order%>','<%=i%>')">
+                    <span class="post-title"><%= lock %> <%= post[i].title %></span>
+                    <span class="post-author"><%= post[i].nickname %></span>
+                </div>
+                <div class="password-box" style="display: none;">
+                    <input 
+                        type="password" 
+                        id="password-<%= i %>" 
+                        placeholder="비밀번호를 입력하세요">
+                    <button onclick="validatePassword('<%=post[i].order%>','<%=i%>')">
+                        확인
+                    </button>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    
+    <script>
+        
+        function handlePostClick(lock, order, index) {
+            if (lock === "unlock") {
+                // unlock 상태이면 서버로 POST 요청을 보내어 리디렉션 처리
+                fetch('/access-unlock-post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ postOrder: order }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.redirectTo) {
+                        window.location.href = data.redirectTo;  // 서버에서 보내준 URL로 리디렉션
+                    } else {
+                        console.log('Failed to redirect');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                // lock 상태이면 비밀번호 입력창을 보여줌
+                showPasswordInput(index);
+            }
+        }
+
+        let before;
+        let passwordBox;
+        function showPasswordInput(index) {
+            // 비밀번호 입력창 표시
+            if(before!=null) {
+                passwordBox = document.querySelector(`#post-box-${before} .password-box`);
+                passwordBox.style.display = 'none';
+            }
+            passwordBox = document.querySelector(`#post-box-${index} .password-box`);
+            passwordBox.style.display = 'block';
+            before = index;
+        }
+        function validatePassword(order, index) {
+
+            const passwordInput = document.querySelector(`#password-${index}`);
+            const passwordValue = passwordInput.value;
+
+            fetch('/access-lock-post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        postOrder: order,
+                        postPassword: passwordValue  }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.redirectTo) {
+                        window.location.href = data.redirectTo;  // 서버에서 보내준 URL로 리디렉션
+                    } else {
+                        console.log('Failed to redirect');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+    </script>
+    
+</body>
+</html>

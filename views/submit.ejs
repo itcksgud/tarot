@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 내비게이션 바 -->
+  <div class="navbar">
+    <a href="/list">타로 못해요 ㅋㅋ 재미로 보는거임</a>
+  </div>
+
+  <!-- 글 작성 폼 -->
+  <div class="form-container">
+    <h2>글 작성</h2>
+    <form id="postForm" action="/submit" method="POST" onsubmit="return validateNumbers()">
+      <!-- 제목 입력 필드 -->
+      <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <!-- 닉네임 입력 필드 -->
+      <div class="form-group">
+        <label for="nickname">닉네임</label>
+        <input type="text" id="nickname" name="nickname" required>
+      </div>
+
+      <div class="form-group">
+        <label>잠금기능 설정</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" id="lock" name="lock" value="lock" checked required>
+            🔒 잠금
+          </label>
+          <label>
+            <input type="radio" id="unlock" name="lock" value="unlock">
+            🔓 해제
+          </label>
+        </div>
+      </div>
+
+      <!-- 비밀번호 입력 필드 -->
+      <div class="form-group" id="password-field">
+        <label for="password">비밀번호</label>
+        <input type="text" id="password" name="password">
+      </div>
+
+      <!-- 내용 입력 필드 -->
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" placeholder="타로 주제 입력 예: 올해 연애운이 궁금해요, "required></textarea>
+      </div>
+
+      <!-- 숫자 입력 필드 -->
+      <div class="form-group">
+        <label for="numbers">1~78 숫자 10개, 오름차순 상관 없음</label>
+        <input type="text" id="numbers" name="numbers" placeholder="1,2,3,4,5,78,77,76,75,74" required>
+      </div>
+
+      <!-- 제출 버튼 -->
+      <button type="submit">글 작성하기</button>
+    </form>
+  </div>
+
+  <script>
+    function validateNumbers() {
+      const numbersInput = document.getElementById('numbers').value;
+      const numbersArray = numbersInput.split(',').map(num => parseInt(num.trim(), 10));
+
+      // 조건 1: 숫자가 10개인지 확인
+      if (numbersArray.length !== 10) {
+        alert('숫자 10개를 입력해야 합니다.');
+        return false;
+      }
+
+      // 조건 2: 모든 숫자가 1~78 범위인지 확인
+      const isValidRange = numbersArray.every(num => num >= 1 && num <= 78);
+      if (!isValidRange) {
+        alert('모든 숫자는 1부터 78 사이여야 합니다.');
+        return false;
+      }
+
+      // 조건 3: 중복된 숫자가 없는지 확인
+      const uniqueNumbers = new Set(numbersArray);
+      if (uniqueNumbers.size !== numbersArray.length) {
+        alert('숫자에 중복이 없어야 합니다.');
+        return false;
+      }
+
+      // 모든 조건을 통과한 경우 제출 허용
+      return true;
+    }
+      // 라디오 버튼 요소 선택
+      const lockRadio = document.getElementById('lock');
+      const unlockRadio = document.getElementById('unlock');
+      const passwordField = document.getElementById('password-field');
+
+      // 초기 상태 설정 (잠금이 기본 선택이므로 비밀번호 필드 표시)
+      passwordField.style.display = 'block';
+
+      // 이벤트 리스너 추가
+      lockRadio.addEventListener('change', () => {
+        if (lockRadio.checked) {
+          passwordField.style.display = 'block'; // 비밀번호 필드 표시
+        }
+      });
+
+      unlockRadio.addEventListener('change', () => {
+        if (unlockRadio.checked) {
+          passwordField.style.display = 'none'; // 비밀번호 필드 숨김
+        }
+      });
+  </script>
+</body>
+</html>
