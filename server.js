@@ -35,8 +35,8 @@ new MongoClient(url).connect().then((client)=>{
   console.log(err)
 })
 
-app.listen(8080, () => {
-    console.log('http://localhost:8080 에서 서버 실행중')
+app.listen(8000, () => {
+    console.log('http://localhost:8000 에서 서버 실행중')
 })
 
 app.get('/list', async (req, res) => {
