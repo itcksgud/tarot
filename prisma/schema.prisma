@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   order     Int
   title     String
