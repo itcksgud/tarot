@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "mongodb:init": "npx prisma db push --force-reset --schema=./prisma/schema.prisma && npx prisma db seed"
   },
   "keywords": [],
   "author": "",
@@ -12,10 +13,12 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.1.0",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "mongodb": "^5.9.2",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "prisma": "^6.1.0"
   }
 }
