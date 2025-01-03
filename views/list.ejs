@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/list">타로 못해요 ㅋㅋ 재미로 보는거임</a>
+        <a href="/list">타로 봐줄수?도 아닐?수도 문의:https://open.kakao.com/o/sPG7wv8g</a>
     </div>
 
     
@@ -16,10 +16,11 @@
     <div class="board-container">
         <a href="/submit" class="top-button">새 글 작성</a>
         <% for (let i = 0; i < post.length; i++) { %>
-            <% let lock = post[i].lock === "lock" ? "🔒" : "🔓"; %>
+            <% let answer = post[i].answer === null ? "🆕" : "🆗"; %>
+            <% let lock = post[i].lock === "lock" ? "🔒" : "🔓"; %> 
             <div class="post-box" id="post-box-<%= i %>">
                 <div class="post" onclick="handlePostClick('<%= post[i].lock %>','<%=post[i].order%>','<%=i%>')">
-                    <span class="post-title"><%= lock %> <%= post[i].title %></span>
+                    <span class="post-title"><%= answer %><%= lock %> <%= post[i].title %></span>
                     <span class="post-author"><%= post[i].nickname %></span>
                 </div>
                 <div class="password-box" style="display: none;">
