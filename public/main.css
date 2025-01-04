@@ -307,18 +307,28 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 
 @media (max-width: 768px) {
   .cardcontainer {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .navbar {
-    width: 768px;
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+}
 
-  }
+.cardgroup {
+    align-items: center; /* 가운데 정렬 */
+    width: 100%; /* 필요한 경우 width 조정 */
+}
+
+.text-area {
+    margin: 50px; /* cardgroup과 간격을 두기 위한 여백 */
+    width: 100%; /* 필요한 경우 width 조정 */
+    box-sizing: border-box;
+}
+
 
 
 }
