@@ -23,4 +23,5 @@ model post {
   content   String
   numbers   Int[]    // 배열 형태
   answer    String?  // null일 수 있으므로 optional
+  review    String?
 }

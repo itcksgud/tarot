@@ -39,12 +39,17 @@ body {
 
   /* 각 게시글 항목 */
   .post {
+    
+    display: flex;
+    align-items: stretch;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .post-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    
-    transition: background-color 0.3s ease;
+    flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
   }
 
   .post-box {
@@ -54,23 +59,32 @@ body {
   .post:hover {
     background-color: #f1f1f1;
   }
+  
+.post-state {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%; /* 부모 컨테이너 높이를 따라감 */
+  margin-right: 15px; /* post-content와 간격을 주기 위해 여백 추가 */
+}
 
   /* 제목 스타일 */
   .post-title {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     font-weight: bold;
     color: #333;
     text-transform: capitalize;
     letter-spacing: 1px;
+    text-align: left; /* 왼쪽 정렬 */
     transition: color 0.3s ease;
   }
 
   /* 작성자 스타일 */
   .post-author {
-    font-size: 0.95rem;
+    margin-top: auto;
+    font-size: 0.8rem;
     color: #6c757d;
     font-style: italic;
-    transition: color 0.3s ease;
   }
 
   /* 마지막 항목 구분선 없애기 */
@@ -83,6 +97,7 @@ body {
 }
 
 .navbar {
+  box-sizing: border-box;
   width: 100%;
   background-color: #647b92;
   padding: 10px 20px;
@@ -162,6 +177,7 @@ body {
   }
 
 .cardcontainer {
+    margin-top: 10px;
     display: flex; /* 두 카드 그룹을 수평으로 배치 */
     gap: 20px; /* 두 카드 그룹 간의 간격 */
 }
@@ -212,13 +228,13 @@ img.second-image {
   display: flex;
   flex-direction: column; /* 세로로 배치 */
   width: 100%; /* 남은 가로 공간 모두 사용 */
-  margin:50px;
+  margin:2%;
   padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff; /* 배경색 추가 */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  gap: 20px; /* 내부 요소 간 간격 */
+  gap: 10px; /* 내부 요소 간 간격 */
 }
 
 .detail-top {
@@ -228,7 +244,7 @@ img.second-image {
   width: 100%;
 }
 
-.post-title {
+.detail-title {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
@@ -236,7 +252,8 @@ img.second-image {
   margin: 0;
 }
 
-.post-nickname {
+.detail-nickname {
+  border-bottom: 2px solid #f1f1f1;
   font-size: 1rem;
   font-style: italic;
   color: #555;
@@ -244,14 +261,15 @@ img.second-image {
   text-align: right;
 }
 
-.post-content {
+.detail-content {
+  border-bottom: 2px solid #f1f1f1;
   font-size: 1rem;
   color: #444;
   line-height: 1.8;
   margin-top: 10px;
 }
 
-.post-answer {
+.detail-answer {
   font-size: 1rem;
   color: black;
   font-weight: bold;
@@ -290,6 +308,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
 
 @media (max-width: 768px) {
   .cardcontainer {

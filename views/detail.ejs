@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tarot</title>
     <link href="/main.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
-        <a href="/list">타로 못해요 ㅋㅋ 재미로 보는거임</a>
+        <a href="/list">개발타로</a>
+        <a target="_blank" href="https://open.kakao.com/o/sPG7wv8g">카톡 문의</a>
     </div>
 
-    <div class="cardcontainer" style="margin: 10px;">
+    <div class="cardcontainer">
         <div class="cardgroup">
             <div class="cardgroup-1">
                 <div>
@@ -42,10 +43,15 @@
                 </div>
         </div>
         <div class="text-area">
-            <h1 class="post-title"><%= post.title %></h1>
-            <p class="post-nickname"><%= post.nickname %></p>
-            <div class="post-content"><%= post.content %></div>
-            <div class="post-answer"><%= post.answer %></div>
+            <h1 class="detail-title"><%= post.title %></h1>
+            <p class="detail-nickname"><%= post.nickname %></p>
+            <div class="detail-content"><%= post.content %></div>
+            <div class="detail-answer"><%= post.answer %></div>
+            <% if(post.answer!=null) { %>
+                <textarea id="review" class="form-group" style="height: auto;" placeholder="타로가 재미있으셨다면 후기를 작성해주세요. 공개될 예정입니다. 아마도."></textarea>
+                <button onclick="putReview('<%= post._id %>')">저장</button>
+
+            <%  } %>
         </div>
 
             
@@ -68,6 +74,37 @@
             secondImage.style.zIndex = 1;
         }
     }
+    function putReview(postId) {
+            // textarea 값 가져오기
+            const newReview = document.querySelector('#review').value; // textarea ID가 'answer'인 경우
+
+            // Fetch 요청 보내기
+            fetch('/update-review', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    postId: postId,
+                    newReview: newReview
+                }),
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    return response.text(); // 성공 시 텍스트 반환
+                } else {
+                    throw new Error('Failed to update review');
+                }
+            })
+            .then(data => {
+                // 성공한 경우
+                alert('Review updated successfully');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message); // 에러 메시지를 사용자에게 알림
+            });
+        }
     </script>
 </body>
 </html>

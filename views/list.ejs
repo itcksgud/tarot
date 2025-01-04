@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tarot</title>
     <link href="/main.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
-        <a href="/list">타로 봐줄수?도 아닐?수도 문의:https://open.kakao.com/o/sPG7wv8g</a>
+        <a href="/list">개발타로</a>
+        <a target="_blank" href="https://open.kakao.com/o/sPG7wv8g">카톡 문의</a>
     </div>
 
     
@@ -16,12 +17,25 @@
     <div class="board-container">
         <a href="/submit" class="top-button">새 글 작성</a>
         <% for (let i = 0; i < post.length; i++) { %>
-            <% let answer = post[i].answer === null ? "🆕" : "🆗"; %>
-            <% let lock = post[i].lock === "lock" ? "🔒" : "🔓"; %> 
             <div class="post-box" id="post-box-<%= i %>">
                 <div class="post" onclick="handlePostClick('<%= post[i].lock %>','<%=post[i].order%>','<%=i%>')">
-                    <span class="post-title"><%= answer %><%= lock %> <%= post[i].title %></span>
-                    <span class="post-author"><%= post[i].nickname %></span>
+                    <div class="post-state">
+                        <% if (post[i].answer===null) { %>
+                            <span style="border-bottom: 2px solid #f1f1f1; color: rgb(15,206,235);">[new]</span>
+                        <% } else { %>
+                            <span style="border-bottom: 2px solid #f1f1f1; color: #ff2a2a;">[answered]</span>
+                        <% } %>
+                        <% if (post[i].lock==="lock") { %>
+                            <span style="color: gray;">[locked]</span>
+                        <% } else { %>
+                            <span style="color: rgb(0, 205, 125);">[open]</span>
+                        <% } %>
+                    </div>
+                    <div class="post-content">
+                        <div class="list-title"><%= post[i].title %></div>
+                        <div class="post-author"><%= post[i].nickname %></div>
+                    </div>
+                    
                 </div>
                 <div class="password-box" style="display: none;">
                     <input 

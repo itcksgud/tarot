@@ -169,6 +169,23 @@ app.put('/update-answer', async (req, res) => {
     }
 });
 
+app.put('/update-review', async (req, res) => {
+    const { postId, newReview } = req.body;
+
+    // postId를 ObjectId로 변환
+    const updatedPost = await db.collection('post').updateOne(
+        { _id: new ObjectId(postId) },  // ObjectId로 변환
+        { $set: { review: newReview } }  // 'answer' 필드를 수정하도록 변경
+    );
+
+    console.log(updatedPost);
+    if (updatedPost.matchedCount > 0) {
+        res.status(200).send('Post updated successfully');
+    } else {
+        res.status(404).send('Post not found');
+    }
+});
+
 app.get('/', async (req, res) => {
     res.redirect('/list');
 });
