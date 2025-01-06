@@ -59,8 +59,8 @@ body {
 .post:hover {
   background-color: #f1f1f1;
 }
-.list-content > div {
-
+.list-content {
+  margin-bottom: 50px;
 }
 
 .list-page-button {
@@ -69,6 +69,7 @@ body {
   justify-content: center;   /* 버튼들 가로로 중앙 정렬 */
   align-items: center;       /* 버튼들 세로로 중앙 정렬 */
   flex-wrap: wrap;           /* 버튼이 화면을 넘어가면 자동으로 줄바꿈 */
+
 }
 
 .list-page-button button {
