@@ -76,6 +76,7 @@ BAD: 올해 연애할 수 있을까요? 몇 월에 할까요?"required></textare
 
   <script>
 
+
     function validateNumbers() {
       const numbersInput = document.getElementById('numbers').value;
       const numbersArray = numbersInput.split(',').map(num => parseInt(num.trim(), 10));
@@ -104,13 +105,37 @@ BAD: 올해 연애할 수 있을까요? 몇 월에 할까요?"required></textare
       return true;
     }
 
-    async function waitingPosting() {
-      document.getElementById('submit').disabled = true;
-      document.getElementById('submit').innerText = 'ㄱㄷ';
-      await wiat(1000);
-      document.getElementById('submit').innerText = '글 작성하기';
-      document.getElementById('submit').disabled = false;
+    async function waitingPosting(event) {
+    event.preventDefault();
+
+    const submitButton = document.getElementById('submit');
+    submitButton.disabled = true;
+    submitButton.innerText = 'ㄱㄷ...'; // 기다려 주세요 메시지
+
+    const formData = new FormData(document.getElementById('postForm'));
+
+    try {
+      const response = await fetch('/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        window.location.href = result.redirect;
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error('네트워크 오류:', error);
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerText = '글 작성하기';
     }
+  }
       // 라디오 버튼 요소 선택
       const lockRadio = document.getElementById('lock');
       const unlockRadio = document.getElementById('unlock');

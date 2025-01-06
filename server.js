@@ -69,56 +69,69 @@ app.get('/submit', async (req, res) => {
     res.render('submit.ejs')
 }) 
 
+let isProcessing = false; // 중복 제출 방지를 위한 잠금 플래그
+
 app.post('/submit', async (req, res) => {
-    const { title, nickname, password, content, numbers, lock } = req.body; // 클라이언트에서 보낸 데이터
-    let seed = new Date();
-    const array = Array.from({ length: 78 }, (_, index) => index);
-    
-    function seededRandom() {
-        const x = Math.sin(seed++) * 10000;
-        return x - Math.floor(x);
+    if (isProcessing) {
+        return res.status(429).json({ message: '요청을 처리 중입니다. 잠시 후 다시 시도해주세요.' });
     }
 
-    let numbersArray = numbers.split(',').map(Number);
+    isProcessing = true; // 요청 처리 시작
 
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(seededRandom() * (i + 1)); // 시드 기반 난수
-        [array[i], array[j]] = [array[j], array[i]];   // Swap
-    }
-
-    for (let i = 0; i < 10; i++) {
-        numbersArray[i] = array[numbersArray[i] - 1];
-    }
-
-    // 가장 큰 order 값을 가진 데이터 찾기
-    let lastPost = await db.collection('post').find().sort({ order: -1 }).limit(1).toArray(); 
-    let nextOrder = 1;
-
-    // 가장 큰 order 값이 있으면 그 값 + 1로 설정
-    if (lastPost.length > 0) {
-        nextOrder = lastPost[0].order + 1;
-    }
-
-    const post = {
-        order: nextOrder,
-        time: seed,
-        title,
-        nickname,
-        lock,
-        password,
-        content,
-        numbers: numbersArray,
-        answer: null,
-        review: null
-    };
-
-    // 새 포스트 삽입
     try {
+        const { title, nickname, password, content, numbers, lock } = req.body; // 클라이언트에서 보낸 데이터
+        const currentTime = new Date(); // 현재 시간 저장
+        let seed = currentTime.getTime(); // 난수 생성을 위한 시드로 현재 시간의 타임스탬프 사용
+
+        const array = Array.from({ length: 78 }, (_, index) => index);
+
+        function seededRandom() {
+            const x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        let numbersArray = numbers.split(',').map(Number);
+
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(seededRandom() * (i + 1)); // 시드 기반 난수
+            [array[i], array[j]] = [array[j], array[i]];   // Swap
+        }
+
+        for (let i = 0; i < 10; i++) {
+            numbersArray[i] = array[numbersArray[i] - 1];
+        }
+
+        // 가장 큰 order 값을 가진 데이터 찾기
+        let lastPost = await db.collection('post').find().sort({ order: -1 }).limit(1).toArray(); 
+        let nextOrder = 1;
+
+        // 가장 큰 order 값이 있으면 그 값 + 1로 설정
+        if (lastPost.length > 0) {
+            nextOrder = lastPost[0].order + 1;
+        }
+
+        const post = {
+            order: nextOrder,
+            time: currentTime,
+            title,
+            nickname,
+            lock,
+            password,
+            content,
+            numbers: numbersArray,
+            answer: null,
+            review: null
+        };
+
+        // 새 포스트 삽입
         await db.collection('post').insertOne(post);
-        res.redirect('/list/1');
+        res.json({ message: '글이 성공적으로 작성되었습니다.', redirect: '/list/1' });
+
     } catch (err) {
         console.error('DB 저장 중 오류:', err);
-        res.redirect('/submit');
+        res.status(500).json({ message: 'DB 저장 중 오류가 발생했습니다. 다시 시도해주세요.' });
+    } finally {
+        isProcessing = false; // 요청 처리 완료 후 잠금 해제
     }
 });
 
