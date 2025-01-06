@@ -39,12 +39,27 @@ app.listen(8000, () => {
     console.log('http://localhost:8000 에서 서버 실행중')
 })
 
-app.get('/list', async (req, res) => {
-    try
-    {
-        let result = await db.collection('post').find().toArray()
-        res.render('list.ejs', { post: result});
-    } catch(e) {
+app.get('/list/:page', async (req, res) => {
+    try {
+        let count = await db.collection('post').countDocuments(); // 문서 개수 반환
+        let totalPages = Math.floor((count+9) / 10); // 총 페이지 수 계산
+        let currentPage = parseInt(req.params.page, 10); // 요청된 페이지 번호
+
+        // 페이지 범위 초과 시 오류 페이지 렌더링
+        if (currentPage < 1 || currentPage > totalPages) {
+            return res.redirect('/list/1');
+        }
+
+        // 요청된 페이지에 해당하는 문서 가져오기
+        let result = await db.collection('post')
+            .find()
+            .sort({ order: -1 })
+            .skip((currentPage - 1) * 10)
+            .limit(10)
+            .toArray();
+
+        res.render('list.ejs', { post: result, count: totalPages, currentPage: currentPage });
+    } catch (e) {
         console.error('DB 조회 중 오류:', e);
         res.status(500).send('DB 조회 중 오류 발생');
     }
@@ -86,19 +101,21 @@ app.post('/submit', async (req, res) => {
 
     const post = {
         order: nextOrder,
+        time: seed,
         title,
         nickname,
         lock,
         password,
         content,
         numbers: numbersArray,
-        answer: null
+        answer: null,
+        review: null
     };
 
     // 새 포스트 삽입
     try {
         await db.collection('post').insertOne(post);
-        res.redirect('/list');
+        res.redirect('/list/1');
     } catch (err) {
         console.error('DB 저장 중 오류:', err);
         res.redirect('/submit');
@@ -187,6 +204,6 @@ app.put('/update-review', async (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    res.redirect('/list');
+    res.redirect('/list/1');
 });
 //nodemon server.js

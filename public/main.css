@@ -1,313 +1,359 @@
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* 게시판 컨테이너 */
-  .board-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* 버튼 스타일 (컨테이너 상단 왼쪽에 위치) */
-  .board-container .top-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    align-self: flex-end;
-    transition: background-color 0.3s;
-  }
-
-  .board-container .top-button:hover {
-    background-color: #0056b3;
-  }
-
-  /* 각 게시글 항목 */
-  .post {
-    
-    display: flex;
-    align-items: stretch;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-  }
-  .post-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-  }
-
-  .post-box {
-    border-bottom: 2px solid #f1f1f1;
-  }
-
-  .post:hover {
-    background-color: #f1f1f1;
-  }
-  
-.post-state {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  height: 100%; /* 부모 컨테이너 높이를 따라감 */
-  margin-right: 15px; /* post-content와 간격을 주기 위해 여백 추가 */
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
 }
 
-  /* 제목 스타일 */
-  .post-title {
-    font-size: 1.0rem;
-    font-weight: bold;
-    color: #333;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    text-align: left; /* 왼쪽 정렬 */
-    transition: color 0.3s ease;
-  }
+/* 게시판 컨테이너 */
+.board-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
 
-  /* 작성자 스타일 */
-  .post-author {
-    margin-top: auto;
-    font-size: 0.8rem;
-    color: #6c757d;
-    font-style: italic;
-  }
+/* 버튼 스타일 (컨테이너 상단 왼쪽에 위치) */
+.board-container .top-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  align-self: flex-end;
+  transition: background-color 0.3s;
+}
 
-  /* 마지막 항목 구분선 없애기 */
-  .post:last-child {
-    border-bottom: none;
-  }
+.board-container .top-button:hover {
+  background-color: #0056b3;
+}
+
+/* 각 게시글 항목 */
+.post {
+  
+  display: flex;
+  align-items: stretch;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+.post-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
+}
+
+.post-box {
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.post:hover {
+  background-color: #f1f1f1;
+}
+.list-content > div {
+
+}
+
+.list-page-button {
+  display: flex;             /* 가로로 배치 */
+  flex-direction: row;       /* 버튼을 가로로 배치 */
+  justify-content: center;   /* 버튼들 가로로 중앙 정렬 */
+  align-items: center;       /* 버튼들 세로로 중앙 정렬 */
+  flex-wrap: wrap;           /* 버튼이 화면을 넘어가면 자동으로 줄바꿈 */
+}
+
+.list-page-button button {
+  margin: 0 5px;             /* 버튼들 간의 간격 */
+  padding: 10px 20px;        /* 버튼 크기 */
+  background-color: white;   /* 기본 버튼 배경 색상 */
+  border: 1px solid #007bff; /* 버튼 테두리 */
+  color: #007bff;            /* 기본 버튼 글자 색상 */
+  cursor: pointer;          /* 마우스 커서 변경 */
+  font-size: 16px;           /* 글자 크기 */
+  display: inline-block;     /* 버튼을 인라인 블록으로 처리 */
+  text-align: center;        /* 버튼 안의 텍스트를 중앙 정렬 */
+}
+
+.list-page-button button:hover {
+  background-color: #0056b3; /* 버튼 hover 시 색상 변경 */
+  color: white;              /* hover 시 글자 색상 변경 */
+}
+
+.list-current-page-button button {
+  background-color: #007bff; /* 현재 페이지 버튼 배경 색상 */
+  color: white;              /* 현재 페이지 버튼 글자 색상 */
+  border: 1px solid #007bff; /* 현재 페이지 버튼 테두리 색상 */
+}
+
+
+
+
+.post-state {
+display: flex;
+flex-direction: column;
+text-align: center;
+height: 100%; /* 부모 컨테이너 높이를 따라감 */
+margin-right: 15px; /* post-content와 간격을 주기 위해 여백 추가 */
+}
+
+/* 제목 스타일 */
+.post-title {
+  font-size: 1.0rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  text-align: left; /* 왼쪽 정렬 */
+  transition: color 0.3s ease;
+}
+
+/* 작성자 스타일 */
+.post-author {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 마지막 항목 구분선 없애기 */
+.post:last-child {
+  border-bottom: none;
+}
 
 .password-box {
-  
+
 }
 
 .navbar {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: #647b92;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* 컨텐츠를 양쪽 끝으로 배치 */
-  overflow: hidden;
+box-sizing: border-box;
+width: 100%;
+background-color: #647b92;
+padding: 10px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between; /* 컨텐츠를 양쪽 끝으로 배치 */
+overflow: hidden;
 }
 
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
 
-  /* 글 작성 폼 스타일 */
-  .form-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
+/* 글 작성 폼 스타일 */
+.form-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
 
-  .form-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-  }
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
 
-  /* 각 입력 필드 스타일 */
-  .form-group {
-    margin-bottom: 20px;
-  }
+/* 각 입력 필드 스타일 */
+.form-group {
+  margin-bottom: 20px;
+}
 
-  .form-group label {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-  }
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
 
-  .form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-  .form-group textarea {
-    resize: vertical;
-    height: 150px;
-  }
+.form-group textarea {
+  resize: vertical;
+  height: 150px;
+}
 
-  /* 숫자 입력 필드 스타일 */
-  .form-group input[type="text"] {
-    width: 100%;
-  }
+/* 숫자 입력 필드 스타일 */
+.form-group input[type="text"] {
+  width: 100%;
+}
 
-  /* 제출 버튼 스타일 */
-  .form-container button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+/* 제출 버튼 스타일 */
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
 .cardcontainer {
-    margin-top: 10px;
-    display: flex; /* 두 카드 그룹을 수평으로 배치 */
-    gap: 20px; /* 두 카드 그룹 간의 간격 */
-}
-.cardgroup {
+  margin-top: 10px;
   display: flex; /* 두 카드 그룹을 수평으로 배치 */
   gap: 20px; /* 두 카드 그룹 간의 간격 */
 }
+.cardgroup {
+display: flex; /* 두 카드 그룹을 수평으로 배치 */
+gap: 20px; /* 두 카드 그룹 간의 간격 */
+}
 .cardcontainer img {
-  width: 100px; /* 이미지의 너비를 원래 크기의 반으로 설정 */
-  height: auto; /* 비율에 맞게 자동으로 높이 설정 */
-  border-radius: 10px; /* 둥근 모서리 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+width: 100px; /* 이미지의 너비를 원래 크기의 반으로 설정 */
+height: auto; /* 비율에 맞게 자동으로 높이 설정 */
+border-radius: 10px; /* 둥근 모서리 */
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
 }
 .cardgroup-1{
-  display: flex;
-  flex-direction: column; /* 각 그룹을 세로로 정렬 */
-  gap: 25px; /* 카드 사이 간격 */
-  margin: 75px;
+display: flex;
+flex-direction: column; /* 각 그룹을 세로로 정렬 */
+gap: 25px; /* 카드 사이 간격 */
+margin: 75px;
 }
 .cardgroup-1 > div {
-  display: flex;
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
+display: flex;
+justify-content: center; /* 수평 중앙 정렬 */
+align-items: center; /* 수직 중앙 정렬 */
 }
 .cardgroup-1-row {
-  display: flex;
-  flex-direction: row; /* 이미지를 가로로 배치 */
-  gap: 25px; /* 이미지들 간의 간격 10px */
-  justify-content: center; /* 중앙 정렬 */
+display: flex;
+flex-direction: row; /* 이미지를 가로로 배치 */
+gap: 25px; /* 이미지들 간의 간격 10px */
+justify-content: center; /* 중앙 정렬 */
 }
 .cardgroup-2 {
-    display: flex;
-    flex-direction: column; /* 각 그룹을 세로로 정렬 */
-    gap: 10px; /* 카드 사이 간격 */
-  }
+  display: flex;
+  flex-direction: column; /* 각 그룹을 세로로 정렬 */
+  gap: 10px; /* 카드 사이 간격 */
+}
 
 
 .image-wrapper {
-    position: relative; /* 이미지들에 상대적인 위치를 설정 */
+  position: relative; /* 이미지들에 상대적인 위치를 설정 */
 }
 
 img.second-image {
-    position: absolute;
-    top: -20px;  /* 위로 20px 이동 */
-    right: -20px; /* 오른쪽으로 20px 이동 */
+  position: absolute;
+  top: -20px;  /* 위로 20px 이동 */
+  right: -20px; /* 오른쪽으로 20px 이동 */
 }
 .text-area {
-  display: flex;
-  flex-direction: column; /* 세로로 배치 */
-  width: 100%; /* 남은 가로 공간 모두 사용 */
-  margin:2%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #ffffff; /* 배경색 추가 */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  gap: 10px; /* 내부 요소 간 간격 */
+display: flex;
+flex-direction: column; /* 세로로 배치 */
+width: 100%; /* 남은 가로 공간 모두 사용 */
+margin:2%;
+padding: 20px;
+box-sizing: border-box;
+background-color: #ffffff; /* 배경색 추가 */
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+gap: 10px; /* 내부 요소 간 간격 */
 }
 
 .detail-top {
-  display: flex;
-  justify-content: space-between; /* 제목과 닉네임을 좌우로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  width: 100%;
+display: flex;
+justify-content: space-between; /* 제목과 닉네임을 좌우로 정렬 */
+align-items: center; /* 수직 가운데 정렬 */
+width: 100%;
 }
 
 .detail-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  text-align: left;
-  margin: 0;
+font-size: 2rem;
+font-weight: bold;
+color: #333;
+text-align: left;
+margin: 0;
 }
 
 .detail-nickname {
-  border-bottom: 2px solid #f1f1f1;
-  font-size: 1rem;
-  font-style: italic;
-  color: #555;
-  margin: 0;
-  text-align: right;
+border-bottom: 2px solid #f1f1f1;
+font-size: 1rem;
+font-style: italic;
+color: #555;
+margin: 0;
+text-align: right;
 }
 
 .detail-content {
-  border-bottom: 2px solid #f1f1f1;
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.8;
-  margin-top: 10px;
+border-bottom: 2px solid #f1f1f1;
+font-size: 1rem;
+color: #444;
+line-height: 1.8;
+margin-top: 10px;
 }
 
+
 .detail-answer {
-  font-size: 1rem;
-  color: black;
-  font-weight: bold;
-  margin-top: 10px;
+font-size: 1rem;
+color: black;
+font-weight: bold;
+margin-top: 10px;
+}
+.detail-review {
+border-top: 2px solid #f1f1f1;
+font-size: 1rem;
+color: #444;
+line-height: 1.8;
+margin-top: 10px;
 }
 a {
-  text-decoration: none;
+text-decoration: none;
 }
 a:hover {
-  text-decoration: none; /* 호버 상태에서도 밑줄 제거 */
+text-decoration: none; /* 호버 상태에서도 밑줄 제거 */
 }
 
 .radio-group {
-  display: flex; /* 가로 배치 */
-  align-items: center; /* 세로 정렬 */
-  gap: 20px; /* 각 옵션 간 간격 */
+display: flex; /* 가로 배치 */
+align-items: center; /* 세로 정렬 */
+gap: 20px; /* 각 옵션 간 간격 */
 }
 
 .radio-group label {
 
-  font-size: 16px; /* 텍스트 크기 */
+font-size: 16px; /* 텍스트 크기 */
 }
 
 .radio-group input[type="radio"] {
-  width: 16px; /* 라디오 버튼 크기 */
-  height: 16px; /* 라디오 버튼 크기 */
-  margin: 0; /* 기본 여백 제거 */
+width: 16px; /* 라디오 버튼 크기 */
+height: 16px; /* 라디오 버튼 크기 */
+margin: 0; /* 기본 여백 제거 */
 }
 body {
-  background-image: url('bg.jpg'); /* 배경 이미지 */
-  background-size: cover; /* 화면 전체에 맞게 이미지 크기 조정 */
-  background-position: top center; /* 이미지의 위치를 상단 중앙으로 설정 */
-  background-repeat: no-repeat; /* 이미지를 반복하지 않음 */
-  background-attachment: fixed; /* 배경 이미지가 스크롤과 함께 움직이지 않도록 설정 */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100vh;
+background-image: url('bg.jpg'); /* 배경 이미지 */
+background-size: cover; /* 화면 전체에 맞게 이미지 크기 조정 */
+background-position: top center; /* 이미지의 위치를 상단 중앙으로 설정 */
+background-repeat: no-repeat; /* 이미지를 반복하지 않음 */
+background-attachment: fixed; /* 배경 이미지가 스크롤과 함께 움직이지 않도록 설정 */
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+height: 100vh;
 }
 
 
@@ -318,43 +364,43 @@ body {
     align-items: center; /* 가운데 정렬 */
     width: 100%;
     height: auto;
-}
+  }
 
-.cardgroup {
-    align-items: center; /* 가운데 정렬 */
-    width: 100%; /* 필요한 경우 width 조정 */
-    gap: 10px;
-}
+  .cardgroup {
+      align-items: center; /* 가운데 정렬 */
+      width: 100%; /* 필요한 경우 width 조정 */
+      gap: 10px;
+  }
 
-.text-area {
-    margin: 50px; /* cardgroup과 간격을 두기 위한 여백 */
-    width: 100%; /* 필요한 경우 width 조정 */
-    box-sizing: border-box;
-}
+  .text-area {
+      margin: 50px; /* cardgroup과 간격을 두기 위한 여백 */
+      width: 100%; /* 필요한 경우 width 조정 */
+      box-sizing: border-box;
+  }
 
-.cardcontainer img {
-  width: 75px; /* 이미지의 너비를 원래 크기의 반으로 설정 */
-  height: auto; /* 비율에 맞게 자동으로 높이 설정 */
-  border-radius: 7.5px; /* 둥근 모서리 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-}
+  .cardcontainer img {
+    width: 75px; /* 이미지의 너비를 원래 크기의 반으로 설정 */
+    height: auto; /* 비율에 맞게 자동으로 높이 설정 */
+    border-radius: 7.5px; /* 둥근 모서리 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 
-.cardgroup-1{
-  gap: 20px; /* 카드 사이 간격 */
-  margin: 20px;
-}
+  .cardgroup-1{
+    gap: 20px; /* 카드 사이 간격 */
+    margin: 20px;
+  }
 
-.cardgroup-1-row {
-  gap: 20px; /* 이미지들 간의 간격 10px */
-}
-.cardgroup-2 {
+  .cardgroup-1-row {
+    gap: 20px; /* 이미지들 간의 간격 10px */
+  }
+  .cardgroup-2 {
     gap: 5px; /* 카드 사이 간격 */
   }
   img.second-image {
     position: absolute;
     top: -15px;  /* 위로 20px 이동 */
     right: -15px; /* 오른쪽으로 20px 이동 */
-}
+  }
 
   .text-area {
     display: flex;
@@ -405,6 +451,14 @@ body {
     font-size: 0.75rem;
     color: black;
     font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .detail-review {
+    border-top: 2px solid #f1f1f1;
+    font-size: 0.75rem;
+    color: #444;
+    line-height: 1.8;
     margin-top: 10px;
   }
 }

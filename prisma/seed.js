@@ -11,7 +11,8 @@ async function main() {
       password: "1234",
       content: "This is a seeded post.",
       numbers: [1, 2, 3, 4,5,6,7,8,9,10], // 배열 형태
-      answer: null // null 가능
+      answer: null, // null 가능
+      review: null
     }
   });
 }

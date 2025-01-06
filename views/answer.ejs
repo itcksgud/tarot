@@ -42,13 +42,17 @@
             </div>
 
             <div class="text-area">
-                <h1 class="post-title"><%= post.title %></h1>
-                <p class="post-nickname"><%= post.nickname %></p>
-                <div class="post-content"><%= post.content %></div>
-                <div class="post-answer">
-                    <textarea id="answer"><%= post.answer %></textarea>
-                </div>
-                
+                <h1 class="detail-title"><%= post.title %></h1>
+                <p class="detail-nickname"><%= post.nickname %></p>
+                <div class="detail-content"><%= post.content %></div>
+                <div class="detail-answer"><%= post.answer %></div>
+                <% if(post.answer!=null) { %>
+                    <textarea id="review" class="form-group" style="height: auto;" placeholder="타로가 재미있으셨다면 후기를 작성해주세요. 공개될 예정입니다. 아마도."></textarea>
+                    <button onclick="putReview('<%= post._id %>')">저장</button>
+                <%  } %>
+                <% if(post.review!=null) { %>
+                    <div class="detail-review"><%= post.review %></div>
+                <% } %>
                 <button onclick="putAnswer('<%= post._id %>')">저장</button>
             </div>
         </div>
