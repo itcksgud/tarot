@@ -108,7 +108,7 @@ BAD: 올해 연애할 수 있을까요? 몇 월에 할까요?"required></textare
     async function waitingPosting(event) {
     event.preventDefault();
 
-    const submitButton = document.getElementById('submit');
+    const submitButton =  await document.getElementById('submit');
     submitButton.disabled = true;
     submitButton.innerText = 'ㄱㄷ...'; // 기다려 주세요 메시지
 

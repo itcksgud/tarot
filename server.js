@@ -176,7 +176,7 @@ app.post('/access-lock-post', async (req, res) => {
     }
 });
 
-app.get('/answercksckscks/:postId', async (req, res) => {
+app.get('/a/:postId', async (req, res) => {
     const postId = req.params.postId;
     const post = await db.collection('post').findOne({ _id: new ObjectId(postId) });
     res.render('answer', { post });
