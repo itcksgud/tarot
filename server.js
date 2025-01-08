@@ -21,16 +21,16 @@ app.use(session({
 
 app.use(bodyParser.json());
 
-
+require('dotenv').config();
 
 //mongodb
 const {MongoClient, ObjectId} = require('mongodb');
 
 let db
-const url = 'mongodb+srv://kingcrown20200:qwer1234@cluster0.rwn2f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const url = process.env.DATABASE_URL;
 new MongoClient(url).connect().then((client)=>{
   console.log('DB연결성공')
-  db = client.db('tarot')
+  db = client.db();
 }).catch((err)=>{
   console.log(err)
 })
