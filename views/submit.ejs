@@ -67,7 +67,7 @@ BAD: 올해 연애할 수 있을까요? 몇 월에 할까요?"required></textare
       </div>
 
       <!-- 제출 버튼 -->
-      <button id="submit" type="submit" onclick="waitingPosting" >글 작성하기</button>
+      <button id="submit" type="submit">글 작성하기</button>
     </form>
   </div>
   <div>
@@ -105,37 +105,6 @@ BAD: 올해 연애할 수 있을까요? 몇 월에 할까요?"required></textare
       return true;
     }
 
-    async function waitingPosting(event) {
-    event.preventDefault();
-
-    const submitButton =  await document.getElementById('submit');
-    submitButton.disabled = true;
-    submitButton.innerText = 'ㄱㄷ...'; // 기다려 주세요 메시지
-
-    const formData = new FormData(document.getElementById('postForm'));
-
-    try {
-      const response = await fetch('/submit', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(result.message);
-        window.location.href = result.redirect;
-      } else {
-        alert(result.message);
-      }
-    } catch (error) {
-      console.error('네트워크 오류:', error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    } finally {
-      submitButton.disabled = false;
-      submitButton.innerText = '글 작성하기';
-    }
-  }
       // 라디오 버튼 요소 선택
       const lockRadio = document.getElementById('lock');
       const unlockRadio = document.getElementById('unlock');

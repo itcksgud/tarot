@@ -82,7 +82,8 @@ app.post('/submit', async (req, res) => {
         const { title, nickname, password, content, numbers, lock } = req.body; // 클라이언트에서 보낸 데이터
         const currentTime = new Date(); // 현재 시간 저장
         let seed = currentTime.getTime(); // 난수 생성을 위한 시드로 현재 시간의 타임스탬프 사용
-
+    
+        console.log(req.body);
         const array = Array.from({ length: 78 }, (_, index) => index);
 
         function seededRandom() {
@@ -125,7 +126,7 @@ app.post('/submit', async (req, res) => {
 
         // 새 포스트 삽입
         await db.collection('post').insertOne(post);
-        res.json({ message: '글이 성공적으로 작성되었습니다.', redirect: '/list/1' });
+        res.redirect('/list/1')
 
     } catch (err) {
         console.error('DB 저장 중 오류:', err);
